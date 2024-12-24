@@ -32,6 +32,13 @@ spec:
       containers:
       - name: backend
         image: rajikakani412/backend:v1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits: # limits should be greater than or equal to requests
+            cpu: 100m
+            memory: 128Mi
         envFrom:
         - configMapRef:
             name: backend
@@ -51,4 +58,18 @@ spec:
   - name: backend-port
     protocol: TCP
     port: 8080 # this is service port
-    targetport: 8080 # this is container port. 
+    targetport: 8080 # this is container port.
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+  namespace: expense
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: v1
+    kind: Deployment
+    name: backend
+  targetCPUUtilizationPercentage:  15 # usually 75 or more in real env
