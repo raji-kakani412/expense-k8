@@ -50,4 +50,4 @@ spec:
   - name: mysql-port
     protocol: TCP
     port: 3306 # this is service port
-    targetport: 3306 # this is container port. 
+    targetPort: 3306 # this is container port. 
