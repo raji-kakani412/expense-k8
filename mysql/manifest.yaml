@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
@@ -39,9 +39,8 @@ spec:
 apiVersion: v1
 kind: Service # this creates ClusterIP service
 metadata:
-  namespace: expense
   name: mysql
-  
+  namespace: expense
 spec:
   selector:
    app: mysql
