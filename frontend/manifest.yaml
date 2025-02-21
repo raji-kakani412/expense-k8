@@ -129,16 +129,16 @@ spec:
             memory: 128Mi
         volumeMounts:
         - name: nginx-conf
-          mountPath: /etc/ngnix/ngnix.conf
+          mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
           readOnly: true # cannot go to pod and modify manually
       volumes:
-      - name: ngnix-conf
+      - name: nginx-conf
         configMap: 
           name: frontend
           items:
           - key: nginx.conf
-            path: ngnix.conf
+            path: nginx.conf
 ---
 webVersion: v1
 kind: Service 
