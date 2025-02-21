@@ -128,10 +128,10 @@ spec:
             cpu: 100m
             memory: 128Mi
         volumeMounts:
-          - name: nginx-conf
-            mountPath: /etc/ngnix/ngnix.conf
-            subPath: nginx.conf
-            readOnly: true # cannot go to pod and modify manually
+        - name: nginx-conf
+          mountPath: /etc/ngnix/ngnix.conf
+          subPath: nginx.conf
+          readOnly: true # cannot go to pod and modify manually
       volumes:
       - name: ngnix-conf
         configMap: 
@@ -156,7 +156,7 @@ spec:
   - name: frontend-port
     protocol: TCP
     port: 80 # this is service port
-    targetport: 80 # this is container port.
+    targetPort: 80 # this is container port.
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
